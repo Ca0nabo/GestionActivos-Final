@@ -7,6 +7,9 @@ namespace GestionActivos.Models
         [Key]
         public int Id { get; set; }
         public string Nombre { get; set; }
+
+        [Required(ErrorMessage = "La cédula es obligatoria")]
+        [ValidadorCedula] // <--- Esta es la magia
         public string Cedula { get; set; }
 
         public int DepartamentoId { get; set; } // La llave foranea
