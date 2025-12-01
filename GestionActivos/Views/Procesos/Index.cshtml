@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Cálculo Mensual";
+}
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3>🏦 Ejecutar Depreciación Mensual</h3>
+        </div>
+        <div class="card-body">
+            
+            @if (ViewBag.Mensaje != null)
+            {
+                <div class="alert alert-@ViewBag.Tipo" role="alert">
+                    @ViewBag.Mensaje
+                </div>
+            }
+
+            <p>Seleccione el período para calcular la depreciación de todos los activos fijos.</p>
+
+            <form asp-action="EjecutarDepreciacion" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Año</label>
+                        <input type="number" name="anio" class="form-control" value="@DateTime.Now.Year" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Mes</label>
+                        <select name="mes" class="form-control">
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-lg w-100">
+                    ⚙️ Ejecutar Proceso
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

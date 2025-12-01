@@ -1,0 +1,74 @@
+﻿@model IEnumerable<GestionActivos.Models.CalculoDepreciacion>
+
+@{
+    ViewData["Title"] = "Consulta de Depreciación";
+}
+
+<div class="container mt-4">
+    <h2>🔎 Consulta de Depreciaciones</h2>
+    
+    <div class="card p-3 my-3 bg-light">
+        <form method="get" class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Año</label>
+                <input type="number" name="anio" class="form-control" value="@ViewBag.Anio" placeholder="Ej: 2025">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Mes</label>
+                <select name="mes" class="form-control">
+                    <option value="">-- Todos --</option>
+                    <option value="1">Enero</option>
+                    <option value="2">Febrero</option>
+                    <option value="3">Marzo</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Mayo</option>
+                    <option value="6">Junio</option>
+                    <option value="7">Julio</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Buscar</button>
+            </div>
+        </form>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Período</th>
+                <th>Activo</th>
+                <th>Fecha Proceso</th>
+                <th>Monto Depreciado</th>
+                <th>Dep. Acumulada</th>
+                <th>Cta. Depreciación</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-muted">No hay datos para mostrar</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MesProceso / @item.AnoProceso</td>
+                        <td>@item.ActivoFijo?.Descripcion</td>
+                        <td>@item.FechaProceso.ToShortDateString()</td>
+                        <td class="text-success fw-bold">@item.MontoDepreciado.ToString("C")</td>
+                        <td>@item.DepreciacionAcumulada.ToString("C")</td>
+                        <td>@item.CuentaDepreciacion</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
