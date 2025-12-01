@@ -1,5 +1,7 @@
-using Microsoft.EntityFrameworkCore;
 using GestionActivos.Data;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
@@ -13,6 +15,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("CadenaConexionPostgres")));
 
 var app = builder.Build();
+
+var cultureInfo = new CultureInfo("en-US"); // Usamos formato USA para el signo $
+cultureInfo.NumberFormat.CurrencySymbol = "$"; // Forzamos el signo de peso/dólar
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(cultureInfo),
+    SupportedCultures = new List<CultureInfo> { cultureInfo },
+    SupportedUICultures = new List<CultureInfo> { cultureInfo }
+});
 
 // 3. Configurar tubería HTTP
 if (!app.Environment.IsDevelopment())
