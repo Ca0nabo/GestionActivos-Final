@@ -14,5 +14,6 @@ namespace GestionActivos.Data
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<ActivoFijo> ActivosFijos { get; set; }
         public DbSet<CalculoDepreciacion> CalculoDepreciacion { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }

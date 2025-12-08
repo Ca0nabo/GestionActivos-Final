@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using GestionActivos.Data;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // 1. Agregar servicios (MVC)
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option =>
+    {
+        option.LoginPath = "/Acceso/Login"; // Si no tienes permiso, te manda aquí
+        option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    });
 
 // 2. Conexión a PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -37,6 +45,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles(); // ESTO ES LO IMPORTANTE (Evita MapStaticAssets)
 
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
