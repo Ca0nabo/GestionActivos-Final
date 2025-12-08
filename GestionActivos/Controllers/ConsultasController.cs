@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using GestionActivos.Data;
 using GestionActivos.Models;
 
 namespace GestionActivos.Controllers
 {
+    [Authorize]
     public class ConsultasController : Controller
     {
         private readonly ApplicationDbContext _context;

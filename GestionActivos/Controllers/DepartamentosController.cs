@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GestionActivos.Data;
 using GestionActivos.Models;
 
 namespace GestionActivos.Controllers
 {
+    [Authorize]
     public class DepartamentosController : Controller
     {
         private readonly ApplicationDbContext _context;

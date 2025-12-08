@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using GestionActivos.Data;
 using GestionActivos.Models;
@@ -7,6 +8,7 @@ namespace GestionActivos.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ContabilidadController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 using GestionActivos.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionActivos.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()

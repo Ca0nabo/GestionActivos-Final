@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GestionActivos.Data;
@@ -6,6 +7,7 @@ using GestionActivos.Models;
 
 namespace GestionActivos.Controllers
 {
+    [Authorize]
     public class ActivoFijosController : Controller
     {
         private readonly ApplicationDbContext _context;
