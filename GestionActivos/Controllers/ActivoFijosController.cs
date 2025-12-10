@@ -20,8 +20,12 @@ namespace GestionActivos.Controllers
         // GET: ActivoFijos
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ActivosFijos.Include(a => a.Departamento).Include(a => a.TipoActivo);
-            return View(await applicationDbContext.ToListAsync());
+            // Incluimos AMBAS relaciones
+            var activosCompletos = _context.ActivosFijos
+                .Include(a => a.Departamento)
+                .Include(a => a.TipoActivo);
+
+            return View(await activosCompletos.ToListAsync());
         }
 
         // GET: ActivoFijos/Details/5

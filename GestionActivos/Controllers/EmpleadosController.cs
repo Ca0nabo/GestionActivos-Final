@@ -20,8 +20,9 @@ namespace GestionActivos.Controllers
         // GET: Empleados
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Empleados.Include(e => e.Departamento);
-            return View(await applicationDbContext.ToListAsync());
+            // Usamos .Include para "unir" la tabla de empleados con la de departamentos
+            var empleadosConDpto = _context.Empleados.Include(e => e.Departamento);
+            return View(await empleadosConDpto.ToListAsync());
         }
 
         // GET: Empleados/Details/5
