@@ -7,7 +7,45 @@
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <style>body { display: flex; align-items: center; justify-content: center; height: 100vh; background: #f0f2f5; }</style>
+    <style>
+        body {
+            /* Imagen de fondo */
+            background: url('/css/fondo1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            /* Capa oscura encima para que se lean las letras (opcional) */
+            background-color: rgba(0,0,0,0.5);
+            background-blend-mode: overlay;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .card-login {
+            width: 350px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); /* Sombra más fuerte */
+            background: rgba(255, 255, 255, 0.95); /* Fondo blanco semitransparente */
+        }
+
+        /* Cambiar el título a verde */
+        .text-primary {
+            color: #2e7d32 !important;
+        }
+
+        /* Botón verde */
+        .btn-primary {
+            background-color: #2e7d32;
+            border: none;
+            transition: 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: #1b5e20;
+                transform: scale(1.05);
+            }
+    </style>
 </head>
 <body>
     <div class="card p-4 shadow" style="width: 350px;">

@@ -29,3 +29,55 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* --- TEMA VERDE PERSONALIZADO --- */
+:root {
+    --verde-principal: #2e7d32; /* Verde Bosque elegante */
+    --verde-claro: #4caf50; /* Verde Google */
+    --verde-oscuro: #1b5e20; /* Verde muy oscuro para hover */
+}
+
+/* Reemplazamos el color de los botones principales */
+.btn-primary {
+    background-color: var(--verde-principal) !important;
+    border-color: var(--verde-principal) !important;
+}
+
+    .btn-primary:hover {
+        background-color: var(--verde-oscuro) !important;
+        border-color: var(--verde-oscuro) !important;
+    }
+
+/* Textos que antes eran azules */
+.text-primary {
+    color: var(--verde-principal) !important;
+}
+
+/* Bordes y líneas */
+.border-primary {
+    border-color: var(--verde-principal) !important;
+}
+
+/* Encabezados de tarjetas */
+.card-header.bg-primary {
+    background-color: var(--verde-principal) !important;
+}
+
+/* El enlace activo del menú */
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: var(--verde-principal) !important;
+}
+
+/* Ajuste de la barra de navegación (Menu) */
+.navbar {
+    background-color: var(--verde-principal) !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.navbar-brand, .nav-link {
+    color: white !important; /* Letras blancas para que se lean sobre el verde */
+}
+
+    .nav-link:hover {
+        color: #e8f5e9 !important; /* Blanco verduzco al pasar el mouse */
+    }

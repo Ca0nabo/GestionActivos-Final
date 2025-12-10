@@ -1,8 +1,32 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    /* Forzamos el fondo del body solo cuando carga esta vista */
+    body {
+        background: url('/css/fondo2.jpg') no-repeat center center fixed !important;
+        background-size: cover !important;
+    }
+
+    /* Hacemos que el contenido principal tenga un fondo blanco suave para leer */
+    .container-contenido {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 15px;
+        margin-top: 50px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+</style>
+
+<div class="container-contenido text-center">
+    <h1 class="display-4 text-success fw-bold">Gestión de Activos Fijos</h1>
+    <p class="lead">Bienvenido al sistema de control de inventario y depreciación.</p>
+    <hr class="my-4">
+    <p>Seleccione una opción del menú para comenzar.</p>
+
+    <div class="mt-4">
+        <a class="btn btn-primary btn-lg m-2" asp-controller="ActivoFijos" asp-action="Index">Ver Activos</a>
+        <a class="btn btn-outline-success btn-lg m-2" asp-controller="Consultas" asp-action="Index">Consultas</a>
+    </div>
 </div>
