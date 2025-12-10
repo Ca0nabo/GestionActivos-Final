@@ -32,18 +32,18 @@
 
                         @if (User.IsInRole("Admin"))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-warning fw-bold" asp-controller="Procesos" asp-action="Index">Ejecutar Cierre</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-warning fw-bold" asp-controller="Procesos" asp-action="Index">Ejecutar Cierre</a>
+                        </li>
                         }
 
                         @if (User.Identity!.IsAuthenticated)
                         {
-                            <li class="nav-item ms-auto">
-                                <a class="btn btn-outline-danger btn-sm mt-1 ms-3" asp-controller="Acceso" asp-action="Salir">
-                                    Cerrar Sesión (@User.Identity.Name)
-                                </a>
-                            </li>
+                        <li class="nav-item ms-auto">
+                            <a class="btn btn-salir-verde btn-sm mt-1 ms-3" asp-controller="Acceso" asp-action="Salir">
+                                Cerrar Sesión
+                            </a>
+                        </li>
                         }
                     </ul>
                 </div>
