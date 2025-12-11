@@ -3,30 +3,31 @@
 }
 
 <style>
-    /* Forzamos el fondo del body solo cuando carga esta vista */
+    /* Forzamos el fondo con tu imagen (fondo4.jpg) */
     body {
         background: url('/css/fondo4.jpg') no-repeat center center fixed !important;
         background-size: cover !important;
+        background-color: #2e7d32 !important; /* Color de respaldo */
     }
 
-    /* Hacemos que el contenido principal tenga un fondo blanco suave para leer */
+    /* Contenedor efecto cristal limpio */
     .container-contenido {
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 30px;
-        border-radius: 15px;
-        margin-top: 50px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        background-color: rgba(255, 255, 255, 0.7); /* Más transparente (70%) */
+        backdrop-filter: blur(8px); /* Efecto borroso detrás */
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.4); /* Borde sutil */
+
+        padding: 50px;
+        border-radius: 20px;
+        margin-top: 100px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Sombra moderna */
+        display: inline-block; /* Para que el cuadro se ajuste al tamaño del texto */
     }
 </style>
 
-<div class="container-contenido text-center">
-    <h1 class="display-4 text-success fw-bold">Gestión de Activos Fijos</h1>
-    <p class="lead">Bienvenido al sistema de control de inventario y depreciación.</p>
-    <hr class="my-4">
-    <p>Seleccione una opción del menú para comenzar.</p>
-
-    <div class="mt-4">
-        <a class="btn btn-primary btn-lg m-2" asp-controller="ActivoFijos" asp-action="Index">Ver Activos</a>
-        <a class="btn btn-outline-success btn-lg m-2" asp-controller="Consultas" asp-action="Index">Consultas</a>
+<div class="text-center">
+    <div class="container-contenido">
+        <h1 class="display-4 text-success fw-bold">Gestión de Activos Fijos</h1>
+        <p class="lead text-muted mb-0">Seleccione una opción del menú para comenzar</p>
     </div>
 </div>

@@ -38,7 +38,6 @@ body {
     /* Nuevos Tonos para Botones */
     --verde-detalles: #00897b; /* Verde Azulado (Teal) para Detalles */
     --verde-editar: #9e9d24; /* Verde Lima Oscuro para Editar */
-    --verde-salir: #1b5e20; /* Verde Bosque Intenso para Salir */
 }
 
 /* Reemplazamos el color de los botones principales */
@@ -110,16 +109,17 @@ body {
         background-color: #827717 !important;
     }
 
-/* 3. Botón SALIR (Personalizado) */
+/* 3. Botón SALIR (Integrado y Lighter Green al Hover) */
 .btn-salir-verde {
-    color: var(--verde-salir) !important;
-    border-color: var(--verde-salir) !important;
-    background-color: transparent;
-    font-weight: bold;
+    color: rgba(255, 255, 255, 0.9) !important; /* Texto casi blanco */
+    border: 1px solid rgba(255, 255, 255, 0.4) !important; /* Borde finito sutil */
+    background-color: transparent !important; /* Totalmente transparente */
     transition: all 0.3s ease;
 }
 
     .btn-salir-verde:hover {
-        background-color: var(--verde-salir) !important;
+        background-color: #66bb6a !important; /* Verde más claro y brillante al pasar el mouse */
+        border-color: #66bb6a !important;
         color: white !important;
+        box-shadow: 0 0 10px rgba(102, 187, 106, 0.5); /* Un pequeño brillo (glow) */
     }
