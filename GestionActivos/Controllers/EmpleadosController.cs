@@ -20,7 +20,6 @@ namespace GestionActivos.Controllers
         // GET: Empleados
         public async Task<IActionResult> Index()
         {
-            // Usamos .Include para "unir" la tabla de empleados con la de departamentos
             var empleadosConDpto = _context.Empleados.Include(e => e.Departamento);
             return View(await empleadosConDpto.ToListAsync());
         }
@@ -45,17 +44,18 @@ namespace GestionActivos.Controllers
         }
 
         // GET: Empleados/Create
+        [Authorize(Roles = "Admin")] // Seguridad: Solo Admin puede entrar
         public IActionResult Create()
         {
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Id");
+            // CORRECCIÓN: Mostrar "Descripcion" en vez de "Id"
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion");
             return View();
         }
 
         // POST: Empleados/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Cedula,DepartamentoId,TipoPersona,FechaIngreso,Estado")] Empleado empleado)
         {
             if (ModelState.IsValid)
@@ -64,11 +64,13 @@ namespace GestionActivos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Id", empleado.DepartamentoId);
+            // CORRECCIÓN
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion", empleado.DepartamentoId);
             return View(empleado);
         }
 
         // GET: Empleados/Edit/5
+        [Authorize(Roles = "Admin")] // Seguridad: Solo Admin puede editar
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,15 +83,15 @@ namespace GestionActivos.Controllers
             {
                 return NotFound();
             }
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Id", empleado.DepartamentoId);
+            // CORRECCIÓN: Mostrar "Descripcion" al editar también
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion", empleado.DepartamentoId);
             return View(empleado);
         }
 
         // POST: Empleados/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Cedula,DepartamentoId,TipoPersona,FechaIngreso,Estado")] Empleado empleado)
         {
             if (id != empleado.Id)
@@ -117,11 +119,13 @@ namespace GestionActivos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Id", empleado.DepartamentoId);
+            // CORRECCIÓN FINAL
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion", empleado.DepartamentoId);
             return View(empleado);
         }
 
         // GET: Empleados/Delete/5
+        [Authorize(Roles = "Admin")] // Seguridad: Solo Admin puede borrar
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,6 +147,7 @@ namespace GestionActivos.Controllers
         // POST: Empleados/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var empleado = await _context.Empleados.FindAsync(id);

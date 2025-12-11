@@ -51,14 +51,13 @@ namespace GestionActivos.Controllers
         // GET: ActivoFijos/Create
         public IActionResult Create()
         {
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Id");
-            ViewData["TipoActivoId"] = new SelectList(_context.TiposActivos, "Id", "Id");
+            // CORRECCIÓN: Usamos "Descripcion" para mostrar el nombre
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion");
+            ViewData["TipoActivoId"] = new SelectList(_context.TiposActivos, "Id", "Descripcion");
             return View();
         }
 
         // POST: ActivoFijos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Descripcion,DepartamentoId,TipoActivoId,FechaRegistro,ValorCompra,DepreciacionAcumulada")] ActivoFijo activoFijo)
@@ -69,8 +68,9 @@ namespace GestionActivos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Id", activoFijo.DepartamentoId);
-            ViewData["TipoActivoId"] = new SelectList(_context.TiposActivos, "Id", "Id", activoFijo.TipoActivoId);
+            // CORRECCIÓN: Usamos "Descripcion" aquí también (por si recarga la página)
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion", activoFijo.DepartamentoId);
+            ViewData["TipoActivoId"] = new SelectList(_context.TiposActivos, "Id", "Descripcion", activoFijo.TipoActivoId);
             return View(activoFijo);
         }
 
@@ -87,14 +87,13 @@ namespace GestionActivos.Controllers
             {
                 return NotFound();
             }
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Id", activoFijo.DepartamentoId);
-            ViewData["TipoActivoId"] = new SelectList(_context.TiposActivos, "Id", "Id", activoFijo.TipoActivoId);
+            // CORRECCIÓN: Usamos "Descripcion" para mostrar el nombre al editar
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion", activoFijo.DepartamentoId);
+            ViewData["TipoActivoId"] = new SelectList(_context.TiposActivos, "Id", "Descripcion", activoFijo.TipoActivoId);
             return View(activoFijo);
         }
 
         // POST: ActivoFijos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,DepartamentoId,TipoActivoId,FechaRegistro,ValorCompra,DepreciacionAcumulada")] ActivoFijo activoFijo)
@@ -124,8 +123,9 @@ namespace GestionActivos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Id", activoFijo.DepartamentoId);
-            ViewData["TipoActivoId"] = new SelectList(_context.TiposActivos, "Id", "Id", activoFijo.TipoActivoId);
+            // CORRECCIÓN FINAL
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion", activoFijo.DepartamentoId);
+            ViewData["TipoActivoId"] = new SelectList(_context.TiposActivos, "Id", "Descripcion", activoFijo.TipoActivoId);
             return View(activoFijo);
         }
 
