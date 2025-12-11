@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GestionActivos</title>
+    <title>@ViewData["Title"] - Gestion A. F.</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -28,14 +28,15 @@
                         <li class="nav-item"><a class="nav-link text-dark" asp-controller="TipoActivos" asp-action="Index">Tipos de Activos</a></li>
                         <li class="nav-item"><a class="nav-link text-dark" asp-controller="Empleados" asp-action="Index">Empleados</a></li>
                         <li class="nav-item"><a class="nav-link text-dark" asp-controller="ActivoFijos" asp-action="Index">Activos Fijos</a></li>
-                        <li class="nav-item"><a class="nav-link text-info fw-bold" asp-controller="Consultas" asp-action="Index">Consultas</a></li>
 
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-warning fw-bold" asp-controller="Procesos" asp-action="Index">Ejecutar Cierre</a>
+                                <a class="nav-link text-warning fw-bold" asp-controller="Procesos" asp-action="Index">Depreciación</a>
                             </li>
                         }
+
+                        <li class="nav-item"><a class="nav-link text-info fw-bold" asp-controller="Consultas" asp-action="Index">Consultas</a></li>
 
                         @if (User.Identity!.IsAuthenticated)
                         {
