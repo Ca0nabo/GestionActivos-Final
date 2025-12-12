@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using GestionActivos.Data;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -11,21 +11,26 @@ var builder = WebApplication.CreateBuilder(args);
 // 1. Agregar servicios (MVC)
 builder.Services.AddControllersWithViews();
 
+// --- 🔽 NUEVO: Servicios de Swagger 🔽 ---
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+// -----------------------------------------
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(option =>
     {
-        option.LoginPath = "/Acceso/Login"; // Si no tienes permiso, te manda aqu�
+        option.LoginPath = "/Acceso/Login"; // Si no tienes permiso, te manda aquí
         option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     });
 
-// 2. Conexi�n a PostgreSQL
+// 2. Conexión a PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("CadenaConexionPostgres")));
 
 var app = builder.Build();
 
 var cultureInfo = new CultureInfo("en-US"); // Usamos formato USA para el signo $
-cultureInfo.NumberFormat.CurrencySymbol = "$"; // Forzamos el signo de peso/d�lar
+cultureInfo.NumberFormat.CurrencySymbol = "$"; // Forzamos el signo de peso/dólar
 
 app.UseRequestLocalization(new RequestLocalizationOptions
 {
@@ -34,12 +39,17 @@ app.UseRequestLocalization(new RequestLocalizationOptions
     SupportedUICultures = new List<CultureInfo> { cultureInfo }
 });
 
-// 3. Configurar tuber�a HTTP
+// 3. Configurar tubería HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+// --- 🔽 NUEVO: Activar la pantalla de Swagger 🔽 ---
+app.UseSwagger();
+app.UseSwaggerUI();
+// --------------------------------------------------
 
 app.UseHttpsRedirection();
 app.UseStaticFiles(); // ESTO ES LO IMPORTANTE (Evita MapStaticAssets)
