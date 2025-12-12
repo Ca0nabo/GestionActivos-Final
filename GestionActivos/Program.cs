@@ -26,7 +26,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 var app = builder.Build();
 
 var cultureInfo = new CultureInfo("en-US");
-cultureInfo.NumberFormat.CurrencySymbol = "$";
+cultureInfo.NumberFormat.CurrencySymbol = "RD$";
 
 app.UseRequestLocalization(new RequestLocalizationOptions
 {
