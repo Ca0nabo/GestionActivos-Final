@@ -10,7 +10,7 @@ namespace GestionActivos.Models
         public int MesProceso { get; set; }
 
         public int ActivoFijoId { get; set; }
-        public ActivoFijo? ActivoFijo { get; set; } // Relación
+        public ActivoFijo? ActivoFijo { get; set; }
 
         public DateTime FechaProceso { get; set; }
         public decimal MontoDepreciado { get; set; }

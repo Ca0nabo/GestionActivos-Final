@@ -16,19 +16,15 @@ namespace GestionActivos.Controllers
             _context = context;
         }
 
-        // Pantalla de Busqueda
         public async Task<IActionResult> Index(int? anio, int? mes)
         {
-            // Consultamos la tabla de Historial
             var query = _context.CalculoDepreciacion.Include(c => c.ActivoFijo).AsQueryable();
 
-            // Si el usuario escribe un año, filtramos
             if (anio.HasValue)
             {
                 query = query.Where(c => c.AnoProceso == anio.Value);
             }
 
-            // Si el usuario elige un mes, filtramos
             if (mes.HasValue)
             {
                 query = query.Where(c => c.MesProceso == mes.Value);
@@ -36,7 +32,6 @@ namespace GestionActivos.Controllers
 
             var resultados = await query.ToListAsync();
 
-            // Para que los campos del filtro no se borren al buscar
             ViewBag.Anio = anio;
             ViewBag.Mes = mes;
 

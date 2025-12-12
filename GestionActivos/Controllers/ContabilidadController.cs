@@ -18,14 +18,12 @@ namespace GestionActivos.Controllers
             _context = context;
         }
 
-        // GET: api/Contabilidad?anio=2025&mes=1
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AsientoContable>>> GetAsientos(int anio, int mes)
         {
-            // 1. Buscamos las depreciaciones de ese mes
             var depreciaciones = await _context.CalculoDepreciacion
                 .Include(d => d.ActivoFijo)
-                .ThenInclude(a => a.TipoActivo) // Necesitamos el tipo para saber la cuenta
+                .ThenInclude(a => a.TipoActivo)
                 .Where(d => d.AnoProceso == anio && d.MesProceso == mes)
                 .ToListAsync();
 
@@ -37,29 +35,26 @@ namespace GestionActivos.Controllers
             var asientos = new List<AsientoContable>();
             int contador = 1;
 
-            // 2. Convertimos cada depreciación en asientos contables (Partida Doble)
             foreach (var item in depreciaciones)
             {
-                // MOVIMIENTO 1: DÉBITO (Gasto de Depreciación)
                 asientos.Add(new AsientoContable
                 {
                     IdentificadorAsiento = contador++,
                     Descripcion = $"Depreciación {item.ActivoFijo?.Descripcion}",
                     IdentificadorTipoInventario = item.ActivoFijo?.TipoActivoId ?? 0,
-                    CuentaContable = item.CuentaDepreciacion, // Cuenta de Gasto
+                    CuentaContable = item.CuentaDepreciacion,
                     TipoMovimiento = "DB",
                     FechaAsiento = item.FechaProceso,
                     MontoAsiento = item.MontoDepreciado,
                     Estado = true
                 });
 
-                // MOVIMIENTO 2: CRÉDITO (Depreciación Acumulada)
                 asientos.Add(new AsientoContable
                 {
                     IdentificadorAsiento = contador++,
                     Descripcion = $"Deprec. Acumulada {item.ActivoFijo?.Descripcion}",
                     IdentificadorTipoInventario = item.ActivoFijo?.TipoActivoId ?? 0,
-                    CuentaContable = "1200-ACUM", // O la cuenta que definas para el crédito
+                    CuentaContable = "1200-ACUM",
                     TipoMovimiento = "CR",
                     FechaAsiento = item.FechaProceso,
                     MontoAsiento = item.MontoDepreciado,
@@ -67,7 +62,6 @@ namespace GestionActivos.Controllers
                 });
             }
 
-            // 3. Devolvemos el JSON
             return Ok(asientos);
         }
     }

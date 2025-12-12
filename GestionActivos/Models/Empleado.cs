@@ -9,11 +9,11 @@ namespace GestionActivos.Models
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "La cédula es obligatoria")]
-        [ValidadorCedula] // <--- Esta es la magia
+        [ValidadorCedula]
         public string Cedula { get; set; }
 
-        public int DepartamentoId { get; set; } // La llave foranea
-        public Departamento? Departamento { get; set; } // La relación para navegar
+        public int DepartamentoId { get; set; }
+        public Departamento? Departamento { get; set; }
 
         public string TipoPersona { get; set; }
         public DateTime FechaIngreso { get; set; }

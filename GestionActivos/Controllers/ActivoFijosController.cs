@@ -17,10 +17,8 @@ namespace GestionActivos.Controllers
             _context = context;
         }
 
-        // GET: ActivoFijos
         public async Task<IActionResult> Index()
         {
-            // Incluimos AMBAS relaciones
             var activosCompletos = _context.ActivosFijos
                 .Include(a => a.Departamento)
                 .Include(a => a.TipoActivo);
@@ -28,7 +26,6 @@ namespace GestionActivos.Controllers
             return View(await activosCompletos.ToListAsync());
         }
 
-        // GET: ActivoFijos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,16 +45,13 @@ namespace GestionActivos.Controllers
             return View(activoFijo);
         }
 
-        // GET: ActivoFijos/Create
         public IActionResult Create()
         {
-            // CORRECCIÓN: Usamos "Descripcion" para mostrar el nombre
             ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion");
             ViewData["TipoActivoId"] = new SelectList(_context.TiposActivos, "Id", "Descripcion");
             return View();
         }
 
-        // POST: ActivoFijos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Descripcion,DepartamentoId,TipoActivoId,FechaRegistro,ValorCompra,DepreciacionAcumulada")] ActivoFijo activoFijo)
@@ -68,13 +62,11 @@ namespace GestionActivos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            // CORRECCIÓN: Usamos "Descripcion" aquí también (por si recarga la página)
             ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion", activoFijo.DepartamentoId);
             ViewData["TipoActivoId"] = new SelectList(_context.TiposActivos, "Id", "Descripcion", activoFijo.TipoActivoId);
             return View(activoFijo);
         }
 
-        // GET: ActivoFijos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,13 +79,11 @@ namespace GestionActivos.Controllers
             {
                 return NotFound();
             }
-            // CORRECCIÓN: Usamos "Descripcion" para mostrar el nombre al editar
             ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion", activoFijo.DepartamentoId);
             ViewData["TipoActivoId"] = new SelectList(_context.TiposActivos, "Id", "Descripcion", activoFijo.TipoActivoId);
             return View(activoFijo);
         }
 
-        // POST: ActivoFijos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,DepartamentoId,TipoActivoId,FechaRegistro,ValorCompra,DepreciacionAcumulada")] ActivoFijo activoFijo)
@@ -123,13 +113,11 @@ namespace GestionActivos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            // CORRECCIÓN FINAL
             ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion", activoFijo.DepartamentoId);
             ViewData["TipoActivoId"] = new SelectList(_context.TiposActivos, "Id", "Descripcion", activoFijo.TipoActivoId);
             return View(activoFijo);
         }
 
-        // GET: ActivoFijos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,7 +137,6 @@ namespace GestionActivos.Controllers
             return View(activoFijo);
         }
 
-        // POST: ActivoFijos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

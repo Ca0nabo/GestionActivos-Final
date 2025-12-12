@@ -9,6 +9,6 @@ namespace GestionActivos.Models
         public string Nombre { get; set; }
         public string Correo { get; set; }
         public string Clave { get; set; }
-        public string Rol { get; set; } // Aquí vendrá "Admin" o "Usuario"
+        public string Rol { get; set; }
     }
 }

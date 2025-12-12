@@ -8,29 +8,25 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Agregar servicios (MVC)
 builder.Services.AddControllersWithViews();
 
-// --- 🔽 NUEVO: Servicios de Swagger 🔽 ---
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// -----------------------------------------
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(option =>
     {
-        option.LoginPath = "/Acceso/Login"; // Si no tienes permiso, te manda aquí
+        option.LoginPath = "/Acceso/Login";
         option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     });
 
-// 2. Conexión a PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("CadenaConexionPostgres")));
 
 var app = builder.Build();
 
-var cultureInfo = new CultureInfo("en-US"); // Usamos formato USA para el signo $
-cultureInfo.NumberFormat.CurrencySymbol = "$"; // Forzamos el signo de peso/dólar
+var cultureInfo = new CultureInfo("en-US");
+cultureInfo.NumberFormat.CurrencySymbol = "$";
 
 app.UseRequestLocalization(new RequestLocalizationOptions
 {
@@ -39,20 +35,17 @@ app.UseRequestLocalization(new RequestLocalizationOptions
     SupportedUICultures = new List<CultureInfo> { cultureInfo }
 });
 
-// 3. Configurar tubería HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
-// --- 🔽 NUEVO: Activar la pantalla de Swagger 🔽 ---
 app.UseSwagger();
 app.UseSwaggerUI();
-// --------------------------------------------------
 
 app.UseHttpsRedirection();
-app.UseStaticFiles(); // ESTO ES LO IMPORTANTE (Evita MapStaticAssets)
+app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthentication();

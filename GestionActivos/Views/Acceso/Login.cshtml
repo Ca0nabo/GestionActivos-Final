@@ -9,10 +9,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <style>
         body {
-            /* Imagen de fondo */
             background: url('/css/fondo3.jpg') no-repeat center center fixed;
             background-size: cover;
-            /* Capa oscura encima para que se lean las letras (opcional) */
             background-color: rgba(0,0,0,0.5);
             background-blend-mode: overlay;
             display: flex;
@@ -26,20 +24,16 @@
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            /* --- AQUÍ ESTÁ EL CAMBIO --- */
-            background: rgba(255, 255, 255, 0.65); /* Más transparente (65%) */
-            backdrop-filter: blur(10px); /* Efecto borroso detrás */
-            -webkit-backdrop-filter: blur(10px); /* Para que funcione en Safari/Mac */
-            border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil brillante */
-            /* --------------------------- */
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* Cambiar el título a verde */
         .text-primary {
             color: #2e7d32 !important;
         }
 
-        /* Botón verde */
         .btn-primary {
             background-color: #2e7d32;
             border: none;

@@ -47,7 +47,6 @@ namespace GestionActivos.Controllers
         [Authorize(Roles = "Admin")] // Seguridad: Solo Admin puede entrar
         public IActionResult Create()
         {
-            // CORRECCIÓN: Mostrar "Descripcion" en vez de "Id"
             ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion");
             return View();
         }
@@ -64,13 +63,12 @@ namespace GestionActivos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            // CORRECCIÓN
             ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion", empleado.DepartamentoId);
             return View(empleado);
         }
 
         // GET: Empleados/Edit/5
-        [Authorize(Roles = "Admin")] // Seguridad: Solo Admin puede editar
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,7 +81,6 @@ namespace GestionActivos.Controllers
             {
                 return NotFound();
             }
-            // CORRECCIÓN: Mostrar "Descripcion" al editar también
             ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion", empleado.DepartamentoId);
             return View(empleado);
         }
@@ -119,13 +116,12 @@ namespace GestionActivos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            // CORRECCIÓN FINAL
             ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Descripcion", empleado.DepartamentoId);
             return View(empleado);
         }
 
         // GET: Empleados/Delete/5
-        [Authorize(Roles = "Admin")] // Seguridad: Solo Admin puede borrar
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

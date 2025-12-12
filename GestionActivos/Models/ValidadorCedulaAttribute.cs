@@ -8,7 +8,7 @@ namespace GestionActivos.Models
         {
             if (value == null || string.IsNullOrEmpty(value.ToString()))
             {
-                return ValidationResult.Success; // Dejamos pasar si es nulo (eso lo valida el [Required])
+                return ValidationResult.Success;
             }
 
             string cedula = value.ToString().Replace("-", "").Trim();
@@ -26,7 +26,6 @@ namespace GestionActivos.Models
             return ValidationResult.Success;
         }
 
-        // El famoso Algoritmo de Luhn (Módulo 10) usado en RD
         private bool ValidaCedula(string pCedula)
         {
             int vnTotal = 0;

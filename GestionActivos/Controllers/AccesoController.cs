@@ -25,13 +25,11 @@ namespace GestionActivos.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string usuario, string clave)
         {
-            // Busca en la BD
             Usuario? userEncontrado = _context.Usuarios
                 .FirstOrDefault(u => u.Correo == usuario && u.Clave == clave);
 
             if (userEncontrado != null)
             {
-                // Guarda los datos en la cookie (incluyendo el ROL)
                 var claims = new List<Claim> {
                     new Claim(ClaimTypes.Name, userEncontrado.Nombre),
                     new Claim(ClaimTypes.Email, userEncontrado.Correo),

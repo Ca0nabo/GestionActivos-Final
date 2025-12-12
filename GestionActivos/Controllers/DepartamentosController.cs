@@ -16,13 +16,11 @@ namespace GestionActivos.Controllers
             _context = context;
         }
 
-        // GET: Departamentoes
         public async Task<IActionResult> Index()
         {
             return View(await _context.Departamentos.ToListAsync());
         }
 
-        // GET: Departamentoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,7 +38,6 @@ namespace GestionActivos.Controllers
             return View(departamento);
         }
 
-        // GET: Departamentoes/Create
         public IActionResult Create()
         {
             return View();
