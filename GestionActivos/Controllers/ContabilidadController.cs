@@ -7,8 +7,8 @@ using GestionActivos.Models;
 namespace GestionActivos.Controllers
 {
     [Route("api/[controller]")]
+    [AllowAnonymous]
     [ApiController]
-    [Authorize]
     public class ContabilidadController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
