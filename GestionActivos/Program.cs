@@ -23,6 +23,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("CadenaConexionPostgres")));
 
+builder.Services.AddHttpClient<GestionActivos.Services.ContabilidadService>();
+
 var app = builder.Build();
 
 var cultureInfo = new CultureInfo("en-US");
